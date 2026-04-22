@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chih-Wen Lan | Portfolio</title>
+  <meta name="description" content="Chih-Wen Lan — Architecture, Heritage Conservation, Sustainability" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Helvetica+Neue:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --light-ink: #555;
+      --rule: #c8c8c8;
+      --bg: #fafaf8;
+      --accent: #8a8a7a;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.2s forwards;
+    }
+
+    .site-name {
+      font-size: 0.85rem;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--light-ink);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 8rem 3rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      animation: fadeIn 1s ease 0.4s forwards;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-left h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-right {
+      padding-bottom: 0.4rem;
+    }
+
+    .hero-right p {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      line-height: 2;
+      color: var(--light-ink);
+      text-transform: uppercase;
+    }
+
+    .divider-line {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--rule);
+      margin: 1rem 0;
+    }
+
+    /* ── TAGS ── */
+    .tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 0.3rem 0.8rem;
+      color: var(--light-ink);
+    }
+
+    /* ── PDF VIEWER SECTION ── */
+    .viewer-section {
+      padding: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.7s forwards;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      display: inline-block;
+      width: 3rem;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .pdf-container {
+      width: 100%;
+      border: 1px solid var(--rule);
+      background: #fff;
+    }
+
+    .pdf-container iframe {
+      display: block;
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
+
+    /* Fallback download button */
+    .pdf-fallback {
+      display: none;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .btn-download {
+      display: inline-block;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 0.9rem 2.5rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-download:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      padding: 3rem;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.9s forwards;
+    }
+
+    .about-section h2 {
+      font-size: 0.65rem;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.2rem;
+    }
+
+    .about-body p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      font-weight: 300;
+      color: var(--light-ink);
+      max-width: 56ch;
+    }
+
+    .about-body p + p { margin-top: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer p {
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--rule);
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATION ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { padding: 1rem 1.5rem; }
+      nav { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 2rem; }
+      .viewer-section { padding: 2rem 1.5rem; }
+      .about-section { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 1rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .pdf-container iframe { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="site-name">Chih-Wen Lan</span>
+    <nav>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Reframing<br /><em>Heritage</em></h1>
+    </div>
+    <div class="hero-right">
+      <p>Cultural Narratives as Spatial Strategies</p>
+      <div class="divider-line"></div>
+      <div class="tags">
+        <span class="tag">Architecture</span>
+        <span class="tag">Heritage</span>
+        <span class="tag">Sustainability</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="viewer-section" id="portfolio">
+    <div class="section-label">Portfolio</div>
+    <div class="pdf-container">
+      <iframe
+        src="protfolio_web.pdf"
+        title="Chih-Wen Lan Portfolio"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="pdf-fallback">
+      <a class="btn-download" href="protfolio_web.pdf" download>Download Portfolio PDF</a>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <h2>About</h2>
+    <div class="about-body">
+      <p>
+        Chih-Wen Lan is an architect and researcher whose work sits at the
+        intersection of architectural heritage conservation, cultural history,
+        and digital documentation. Her practice spans German–Taiwanese
+        architectural exchange, foreign-related architecture in Taiwan, and
+        GIS-based spatial analysis.
+      </p>
+      <p>
+        She holds a PhD from Otto-Friedrich-Universität Bamberg and is
+        currently Assistant Professor in the Department of Architecture at
+        China University of Technology, Taipei.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Chih-Wen Lan &mdash; Architecture · Heritage · Sustainability</p>
+    <p>cwlantw-art.github.io/portfolio01</p>
+  </footer>
+
+</body>
+</html>
